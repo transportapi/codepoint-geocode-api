@@ -12,7 +12,14 @@ test/tmp
 test/version_tmp
 tmp
 
+config/database.yml
+log/*.log
+public/assets/**
+
 # YARD artifacts
 .yardoc
 _yardoc
 doc/
+
+
+
