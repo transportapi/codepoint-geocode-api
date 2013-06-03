@@ -18,6 +18,7 @@ require 'csv'
 # 0.5 secs for ze file
 # 5.9 secs for al file
 # 24 secs for g file
+# 1909 secs (32mins) for full file
 def seed_postcode_csv_copy(codepoint_file_path, delete) 
       
    # get a connection 
