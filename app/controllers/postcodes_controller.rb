@@ -33,7 +33,7 @@ class PostcodesController < ApplicationController
 
       puts 'find nearest n'
       # the cutoff 'distance' in latlon: a heuristic to speed up processing TODO in native 27700 srs
-      latlon_dist_cutoff = 0.1
+      latlon_dist_cutoff = 1
       minlat = lat - latlon_dist_cutoff
       maxlat = lat + latlon_dist_cutoff
       minlon = lon - latlon_dist_cutoff
