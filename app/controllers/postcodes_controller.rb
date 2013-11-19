@@ -32,8 +32,9 @@ class PostcodesController < ApplicationController
       puts "n = "+n.to_s
 
       puts 'find nearest n'
-      # the cutoff 'distance' in latlon: a heuristic to speed up processing TODO in native 27700 srs
-      latlon_dist_cutoff = 1
+      # the cutoff 'distance' in latlon: a heuristic to speed up processing
+		# TODO in native 27700 srs
+      latlon_dist_cutoff = 0.1
       minlat = lat - latlon_dist_cutoff
       maxlat = lat + latlon_dist_cutoff
       minlon = lon - latlon_dist_cutoff
@@ -47,7 +48,7 @@ class PostcodesController < ApplicationController
       # order by distance in projected 27700 SRS (metres).
       distance_sql = "ST_DISTANCE(ST_TRANSFORM(GeometryFromText('POINT("+lon.to_s+" "+lat.to_s+")',4326), 27700), osgb)"
       nearest_sql = "SELECT "+distance_sql+" as dist, * FROM postcodes
-      WHERE latlon && "+boundbox_sql+" ORDER BY "+distance_sql+" DESC LIMIT "+n.to_s
+      WHERE latlon && "+boundbox_sql+" ORDER BY "+distance_sql+" ASC LIMIT "+n.to_s
       puts nearest_sql
 
       postcodes = Postcode.find_by_sql(nearest_sql)
