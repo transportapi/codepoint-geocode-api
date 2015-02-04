@@ -12,7 +12,6 @@ development:
   password:
   host: localhost
   port: 5432
-  template: postgis-template
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -26,7 +25,6 @@ test:
   password: 
   host: localhost
   port: 5432
-  template: postgis-template
 
 production:
   adapter: postgis
@@ -37,4 +35,3 @@ production:
   password: 
   host: localhost
   port: 5432
-  template: postgis-template

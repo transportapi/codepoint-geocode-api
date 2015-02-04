@@ -9,26 +9,30 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130520071123) do
+ActiveRecord::Schema.define(version: 20130520071123) do
 
-  create_table "postcodes", :force => true do |t|
-    t.string   "postcode",                     :limit => 8
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+  enable_extension "postgis"
+
+  create_table "postcodes", force: true do |t|
+    t.string   "postcode",                     limit: 8
     t.integer  "positional_quality_indicator"
     t.integer  "eastings"
     t.integer  "northings"
-    t.string   "country_code",                 :limit => 9
-    t.string   "nhs_regional_ha_code",         :limit => 9
-    t.string   "nhs_ha_code",                  :limit => 9
-    t.string   "admin_county_code",            :limit => 9
-    t.string   "admin_district_code",          :limit => 9
-    t.string   "admin_ward_code",              :limit => 9
-    t.string   "postcode_nows",                :limit => 7
-    t.datetime "created_at",                                  :null => false
-    t.datetime "updated_at",                                  :null => false
-    t.point    "osgb",                         :limit => nil,                 :srid => 27700
-    t.point    "latlon",                       :limit => nil,                 :srid => 4326
+    t.string   "country_code",                 limit: 9
+    t.string   "nhs_regional_ha_code",         limit: 9
+    t.string   "nhs_ha_code",                  limit: 9
+    t.string   "admin_county_code",            limit: 9
+    t.string   "admin_district_code",          limit: 9
+    t.string   "admin_ward_code",              limit: 9
+    t.string   "postcode_nows",                limit: 7
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.spatial  "osgb",                         limit: {:srid=>27700, :type=>"point"}
+    t.spatial  "latlon",                       limit: {:srid=>4326, :type=>"point"}
   end
 
   add_index "postcodes", ["latlon"], :name => "index_postcodes_on_latlon", :spatial => true
