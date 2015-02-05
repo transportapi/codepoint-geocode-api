@@ -60,7 +60,7 @@ def seed_postcode_csv_copy(codepoint_file_path, delete)
    
    # create geom, from SQL
    puts Time.now.to_s+": started update of osgb geom"  
-   connection.execute("UPDATE postcodes SET osgb = geometryfromtext('POINT('||eastings||' '||northings||')',27700)")
+   connection.execute("UPDATE postcodes SET osgb = ST_geometryfromtext('POINT('||eastings||' '||northings||')',27700)")
    puts Time.now.to_s+": started update of latlon geom"   
    connection.execute("UPDATE postcodes SET latlon = ST_TRANSFORM(osgb, 4326)")
 

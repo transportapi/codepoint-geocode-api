@@ -13,7 +13,7 @@ class PostcodesController < ApplicationController
       
       # respond
       unless postcode.nil?
-         render :json => postcode
+        render :json => postcode
       else # if nil
          render :json => {:error => "postcode not found"}
       end
@@ -42,11 +42,11 @@ class PostcodesController < ApplicationController
 
       # set the bounds in lat/lon
       # TODO as a scope?
-      boundbox_sql = "GeometryFromText('POLYGON(( "+minlon.to_s+" "+minlat.to_s+", "+maxlon.to_s+" "+minlat.to_s+", 
+      boundbox_sql = "ST_GeometryFromText('POLYGON(( "+minlon.to_s+" "+minlat.to_s+", "+maxlon.to_s+" "+minlat.to_s+", 
       "+maxlon.to_s+" "+maxlat.to_s+", "+minlon.to_s+" "+maxlat.to_s+", "+minlon.to_s+" "+minlat.to_s+"))',4326)"
       # TODO as a scope?
       # order by distance in projected 27700 SRS (metres).
-      distance_sql = "ST_DISTANCE(ST_TRANSFORM(GeometryFromText('POINT("+lon.to_s+" "+lat.to_s+")',4326), 27700), osgb)"
+      distance_sql = "ST_DISTANCE(ST_TRANSFORM(ST_GeometryFromText('POINT("+lon.to_s+" "+lat.to_s+")',4326), 27700), osgb)"
       nearest_sql = "SELECT "+distance_sql+" as dist, * FROM postcodes
       WHERE latlon && "+boundbox_sql+" ORDER BY "+distance_sql+" ASC LIMIT "+n.to_s
       puts nearest_sql

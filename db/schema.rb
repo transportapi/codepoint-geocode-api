@@ -31,12 +31,12 @@ ActiveRecord::Schema.define(version: 20130520071123) do
     t.string   "postcode_nows",                limit: 7
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "osgb",                         limit: 0
-    t.integer  "latlon",                       limit: 0
+    t.spatial  "osgb",                         limit: {:srid=>27700, :type=>"point"}
+    t.spatial  "latlon",                       limit: {:srid=>4326, :type=>"point"}
   end
 
-  add_index "postcodes", ["latlon"], :name => "index_postcodes_on_latlon"
-  add_index "postcodes", ["osgb"], :name => "index_postcodes_on_osgb"
+  add_index "postcodes", ["latlon"], :name => "index_postcodes_on_latlon", :spatial => true
+  add_index "postcodes", ["osgb"], :name => "index_postcodes_on_osgb", :spatial => true
   add_index "postcodes", ["postcode_nows"], :name => "index_bus_postcodes_on_postcode_nows", :unique => true
 
 end
