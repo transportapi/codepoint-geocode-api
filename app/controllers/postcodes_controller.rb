@@ -13,8 +13,8 @@ class PostcodesController < ApplicationController
   def show
     # find postcode and respond with the standardised resource representation 
     postcode = Postcode.find_by_postcode_nows(@postcode_str)
-    resource = Codepoint::Representation.postcode(postcode)
     unless postcode.nil?
+      resource = Codepoint::Representation.postcode(postcode)
       render :json => resource
     else # if nil
       render :json => {:error => "postcode not found"}
@@ -48,9 +48,9 @@ class PostcodesController < ApplicationController
     if params[:n].nil?
       @n = Codepoint::Near::DEFAULT_N
     else
-  		@n = params[:n].to_i
+      @n = params[:n].to_i
       @n = Codepoint::Near::DEFAULT_N if @n <=0
-  	end
+    end
   end
   
   def get_latlon_from_params
