@@ -31,7 +31,6 @@ def seed_postcode_csv_copy(codepoint_file_path, delete)
    end
    
    puts "Loading codepoint records from CSV file: " + codepoint_file_path   
-   puts "Import process may take several hours "
    
    # delete previous records 
    if delete
