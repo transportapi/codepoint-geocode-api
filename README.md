@@ -22,7 +22,7 @@ The lines above are for the dev and test DBs. Repeat with the suffix RAILS_ENV=p
 
 ### Seeding the DB Installation
 
-Acquire codepoint file from http://www.ordnancesurvey.co.uk/oswebsite/products/code-point-open/index.html . Extract and concatenate into a single text file:
+Acquire codepoint file from https://www.ordnancesurvey.co.uk/business-and-government/products/code-point-open.html . Extract and concatenate into a single text file:
 ```
 unzip codepo_gb.zip
 cd Data/CSV
