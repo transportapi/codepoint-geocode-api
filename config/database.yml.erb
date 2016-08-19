@@ -1,0 +1,15 @@
+common: &default
+  adapter: postgis
+  encoding: UTF8
+  pool: <%= @pool %>
+  host: <%= @host %>
+  port: <%= @port %>
+  template: <%= @template %>
+
+<% @environments.each do |env, config| %>
+<%= env %>:
+  <<: *default
+  database: <%= config.name %>
+  username: <%= config.username %>
+  password: <%= config.password %>
+<% end %>
