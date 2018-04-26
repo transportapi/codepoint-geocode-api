@@ -9,7 +9,7 @@ common: &default
 <% @environments.each do |env, config| %>
 <%= env %>:
   <<: *default
-  database: <%= config.name %>
-  username: <%= config.username %>
-  password: <%= config.password %>
+  database: <%= config['name'] %>
+  username: <%= config['username'] %>
+  password: <%= config['password'] %>
 <% end %>
