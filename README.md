@@ -25,13 +25,12 @@ The lines above are for the dev and test DBs. Repeat with the suffix RAILS_ENV=p
 Acquire codepoint file from https://www.ordnancesurvey.co.uk/business-and-government/products/code-point-open.html . Extract and concatenate into a single text file:
 ```
 unzip codepo_gb.zip
-cd Data/CSV
-cat *.csv > codepointall.csv
+cat Data/CSV/*.csv > codepointall.csv
 ```
 
 To seed the DB:
 
-```rake db:seed path=/path/to/codepointall.csv```
+```rake db:seed path=./codepointall.csv```
 
 Repeat with suffix RAILS_ENV=production for the production DB.
 
