@@ -23,12 +23,6 @@ def seed_postcode_csv_copy(codepoint_file_path, delete)
       
    # get a connection 
    connection = ActiveRecord::Base.connection();
-
-   # check CSV exists 
-   if not File.exist?(codepoint_file_path) 
-      puts "Missing seed data file " + codepoint_file_path
-      return false
-   end
    
    puts "Loading codepoint records from CSV file: " + codepoint_file_path   
    
@@ -68,6 +62,9 @@ def seed_postcode_csv_copy(codepoint_file_path, delete)
    count_pcs = connection.execute(count_pcs_sql)
    i = count_pcs[0]['count']
 
+   # cleanup the temp table
+   connection.execute(drop_temptable_sql)
+
    # close connection
    connection.close()
    
@@ -78,12 +75,7 @@ end
 # This way is slow! 5 hr insert for full, 6secs for ze file, 98 secs for al file
 #
 def seed_postcode_activerecord(codepoint_file_path, delete) 
-      
-   if not File.exist?(codepoint_file_path) 
-      puts "Missing seed data file " + codepoint_file_path
-      return false
-   end
-   
+
    puts "Loading codepoint records from CSV file: " + codepoint_file_path   
    
    if delete
@@ -131,11 +123,19 @@ end
 start_time = Time.now
 puts start_time.to_s+": Started seeding postcodes process"
 
-# Get file (TODO check it exists)
-codepoint_file_path = ENV['path'].to_s
+# Get file
+codepoint_file_path =
+  File.expand_path(ENV['path'].to_s,
+                  File.join(File.dirname(__FILE__), '../'))
 if codepoint_file_path=='' || codepoint_file_path.nil?
    puts "No codepoint path specified. Append rake command with ' path=/path/to/codepoint.csv'"
    abort
+end
+
+# check CSV exists
+if not File.exist?(codepoint_file_path)
+   puts "Missing seed data file " + codepoint_file_path
+   exit
 end
 
 delete = true
