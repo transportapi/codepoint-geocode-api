@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20130520071123) do
   enable_extension "plpgsql"
   enable_extension "postgis"
 
-  create_table "postcodes", force: true do |t|
+  create_table "postcodes", force: :cascade do |t|
     t.string   "postcode",                     limit: 8
     t.integer  "positional_quality_indicator"
     t.integer  "eastings"
@@ -31,12 +31,12 @@ ActiveRecord::Schema.define(version: 20130520071123) do
     t.string   "postcode_nows",                limit: 7
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.spatial  "osgb",                         limit: {:srid=>27700, :type=>"point"}
-    t.spatial  "latlon",                       limit: {:srid=>4326, :type=>"point"}
+    t.geometry "osgb",                         limit: {:srid=>27700, :type=>"st_point"}
+    t.geometry "latlon",                       limit: {:srid=>4326, :type=>"st_point"}
   end
 
-  add_index "postcodes", ["latlon"], :name => "index_postcodes_on_latlon", :spatial => true
-  add_index "postcodes", ["osgb"], :name => "index_postcodes_on_osgb", :spatial => true
-  add_index "postcodes", ["postcode_nows"], :name => "index_bus_postcodes_on_postcode_nows", :unique => true
+  add_index "postcodes", ["latlon"], name: "index_postcodes_on_latlon", using: :gist
+  add_index "postcodes", ["osgb"], name: "index_postcodes_on_osgb", using: :gist
+  add_index "postcodes", ["postcode_nows"], name: "index_bus_postcodes_on_postcode_nows", unique: true, using: :btree
 
 end

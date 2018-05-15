@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-gem "rails", '~> 4.1.14.1'
+gem "rails", '~> 4.2.7.1'
 
 # to play nice with postgis
 gem 'pg', '~> 0.18.1'
 gem 'nofxx-georuby', '~> 1.9.2'
-gem 'activerecord-postgis-adapter', '~> 2.2.1'
+gem 'activerecord-postgis-adapter', '~> 3.1.5'
 
 gem 'jquery-rails', '~> 3.1.3'
 
