@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem "rails", '~> 4.2.7.1'
+gem "rails", '~> 4.2.11'
 
 # to play nice with postgis
 gem 'pg', '~> 0.18.1'
