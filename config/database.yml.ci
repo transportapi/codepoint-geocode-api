@@ -9,14 +9,14 @@ common: &default
 production:
   <<: *default
   database: codepoint_prod
-  username: codepoint_test
+  username: circleci-codepoint
   
 development:
   <<: *default
   database: codepoint_dev
-  username: codepoint_test
+  username: circleci-codepoint
 
 test:
   <<: *default
   database: codepoint_tom_dev
-  username: codepoint_test
+  username: circleci-codepoint
