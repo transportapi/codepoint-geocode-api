@@ -22,6 +22,16 @@ jobs:
     steps:
       - checkout
       - run: mv config/database.yml.ci config/database.yml
+      - run:
+          name: Waiting for Postgres to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z localhost 5432 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for Postgres && exit 1
 
       # Download and cache dependencies
       - restore_cache:
