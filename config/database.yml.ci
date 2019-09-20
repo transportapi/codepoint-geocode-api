@@ -1,0 +1,22 @@
+common: &default
+  adapter: postgis
+  encoding: UTF8
+  pool: 5
+  host: localhost
+  port: 5432
+  template: template0
+
+production:
+  <<: *default
+  database: codepoint_prod
+  username: codepoint_test
+  
+development:
+  <<: *default
+  database: codepoint_dev
+  username: codepoint_test
+
+test:
+  <<: *default
+  database: codepoint_tom_dev
+  username: codepoint_test
