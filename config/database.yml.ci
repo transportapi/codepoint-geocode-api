@@ -18,5 +18,5 @@ development:
 
 test:
   <<: *default
-  database: codepoint_tom_dev
+  database: codepoint_test
   username: circleci-codepoint
