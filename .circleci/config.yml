@@ -13,11 +13,15 @@ jobs:
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
       - image: circleci/postgres:9.5-postgis-ram
+        environment:
+          POSTGRES_USER: circleci-codepoint
+          POSTGRES_DB: codepoint_test
 
     working_directory: ~/repo
 
     steps:
       - checkout
+      - run: mv config/database.yml.ci config/database.yml
 
       # Download and cache dependencies
       - restore_cache:
