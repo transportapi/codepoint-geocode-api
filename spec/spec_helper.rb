@@ -1,6 +1,6 @@
 require 'database_cleaner'
 require 'rubygems'
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
@@ -8,7 +8,7 @@ require File.expand_path("../../config/environment", __FILE__)
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
 
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
