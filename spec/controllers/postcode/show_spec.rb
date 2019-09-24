@@ -3,7 +3,7 @@ require 'json'
 
 describe PostcodesController do
 
-  # use factorygirl to populate DB
+  # use factorybot to populate DB
   before :each do
     create(:postcode)
   end

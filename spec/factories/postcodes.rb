@@ -1,4 +1,4 @@
-FactoryGirl.define do 
+FactoryBot.define do 
   factory :postcode do |p| 
     p.postcode 'EX8 5JF'
     p.positional_quality_indicator 10
